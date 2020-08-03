@@ -3,25 +3,15 @@
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import React from 'react';
-import ModalPicker from 'react-native-modal-selector';
-import styled from '@emotion/native';
-
-const Input = styled.TextInput(({ theme }) => ({
-  borderWidth: 1,
-  borderRadius: 2,
-  padding: 5,
-  margin: 10,
-  borderColor: theme.borderColor,
-  color: theme.labelColor,
-}));
+import Radio from './Radio';
 
 class SelectType extends React.Component {
   getOptions = ({ options }) => {
     if (Array.isArray(options)) {
-      return options.map(val => ({ key: val, label: val }));
+      return options.map(val => ({ value: val, label: val }));
     }
 
-    return Object.keys(options).map(key => ({ label: key, key: options[key] }));
+    return Object.keys(options).map(key => ({ label: key, value: options[key] }));
   };
 
   render() {
@@ -29,24 +19,9 @@ class SelectType extends React.Component {
 
     const options = this.getOptions(knob);
 
-    const active = options.filter(({ key }) => knob.value === key)[0];
-    const selected = active && active.label;
-
     return (
       <View>
-        <ModalPicker
-          data={options}
-          initValue={knob.value}
-          onChange={option => onChange(option.key)}
-          animationType="none"
-        >
-          <Input
-            editable={false}
-            value={selected}
-            autoCapitalize="none"
-            underlineColorAndroid="transparent"
-          />
-        </ModalPicker>
+        <Radio data={options} initValue={knob.value} onChange={item => onChange(item.value)} />
       </View>
     );
   }

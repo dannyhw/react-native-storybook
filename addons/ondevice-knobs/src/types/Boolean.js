@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import { Switch } from 'react-native-switch';
+import { View, Switch } from 'react-native';
 import React from 'react';
 
 class BooleanType extends React.Component {
@@ -14,7 +13,7 @@ class BooleanType extends React.Component {
 
     return (
       <View style={{ margin: 10 }}>
-        <Switch id={knob.name} onValueChange={this.onValueChange} value={knob.value} />
+        <Switch testID={knob.name} value={knob.value} onValueChange={this.onValueChange} />
       </View>
     );
   }
